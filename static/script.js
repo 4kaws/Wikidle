@@ -38,8 +38,11 @@ function validateInput() {
         if (validWords.includes(guess)) {
             submitButton.disabled = false;
         } else {
-            // Check if the word exists in English using the Datamuse API
-            fetch(`https://api.datamuse.com/words?sp=${guess}&max=1`)
+            // Use a CORS proxy to bypass CORS issues
+            const proxyUrl = "https://corsproxy.io/?";
+            const apiUrl = `https://api.datamuse.com/words?sp=${guess}&max=1`;
+
+            fetch(proxyUrl + apiUrl)
                 .then(response => response.json())
                 .then(data => {
                     if (data.length > 0 && data[0].word === guess) {
@@ -56,6 +59,7 @@ function validateInput() {
         submitButton.disabled = true;
     }
 }
+
 
 
 function checkGuess() {
