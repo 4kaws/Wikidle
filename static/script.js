@@ -1,6 +1,7 @@
 let wordOfTheDay = "";
 let validWords = [];
 let persistentRedLetters = new Set();
+let wrongGuesses = [];
 
 // Load the common 5-letter words list
 fetch("static/common_5_letter_words.txt")
@@ -28,7 +29,6 @@ async function sha256(str) {
     return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
 }
 
-// Validate the input and enable/disable the submit button
 // Validate the input using both the local word list and the Datamuse API
 function validateInput() {
     const guess = document.getElementById("guess").value.trim().toLowerCase();
@@ -60,17 +60,20 @@ function validateInput() {
     }
 }
 
-
-
+// Check the guess and provide feedback
 function checkGuess() {
     const guess = document.getElementById("guess").value.toLowerCase();
 
+    // Clear the grid before displaying the new guess
     const grid = document.getElementById("grid");
-    grid.innerHTML = "";  // Clear the grid for new guess
+    grid.innerHTML = "";
 
     let redLetters = new Set();
     let orangeLetters = new Set();
     let greenLetters = new Set();
+
+    const guessRow = document.createElement("div");
+    guessRow.className = "guess-row";
 
     for (let i = 0; i < 5; i++) {
         const cell = document.createElement("div");
@@ -89,12 +92,19 @@ function checkGuess() {
             redLetters.add(guess[i].toUpperCase());
         }
 
-        grid.appendChild(cell);
+        guessRow.appendChild(cell);
     }
+
+    grid.appendChild(guessRow);
 
     document.getElementById("red-letters").textContent = Array.from(persistentRedLetters).join(", ");
     document.getElementById("orange-letters").textContent = Array.from(orangeLetters).join(", ");
     document.getElementById("green-letters").textContent = Array.from(greenLetters).join(", ");
+
+    if (guess !== wordOfTheDay) {
+        wrongGuesses.push(guess.toUpperCase());
+        updateWrongGuessesDisplay();
+    }
 
     // Clear the input box and disable the button
     document.getElementById("guess").value = "";
@@ -106,18 +116,24 @@ function checkGuess() {
     }
 }
 
+// Update the wrong guesses display
+function updateWrongGuessesDisplay() {
+    document.getElementById("wrong-guesses").textContent = `Wrong Guesses: ${wrongGuesses.join(", ")}`;
+}
+
+// Embed the Wikipedia page
 function embedWikipediaPage(word) {
     const wikiContainer = document.getElementById("wiki-embed-container");
     const wikiUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(word)}`;
     wikiContainer.innerHTML = `
         <h2>Learn More About "${word}"</h2>
-        <iframe src="${wikiUrl}" width="100%" height="500px" style="border: none;"></iframe>
+        <iframe src="${wikiUrl}" width="100%" height="700px" style="border: none;"></iframe>
     `;
 }
 
 // Handle Enter key press to submit the guess
 function handleEnter(event) {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && !document.getElementById("submit-button").disabled) {
         checkGuess();
     }
 }
