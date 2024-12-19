@@ -9,4 +9,4 @@ def filter_five_letter_words(input_file, output_file):
         outfile.write("\n".join(five_letter_words))
 
 # Run the function
-filter_five_letter_words("wordlist10000.txt", "common_5_letter_words.txt")
+filter_five_letter_words("wordlist10000.txt", "static/common_5_letter_words.txt")
