@@ -9,13 +9,13 @@ body {
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 5em;
     margin-bottom: 20px;
     font-weight: 700;
 }
 
 h2 {
-    font-size: 1.5em;
+    font-size: 3.5em;
     margin-bottom: 10px;
     font-weight: 700;
 }
@@ -27,6 +27,14 @@ h2 {
     gap: 10px;
     margin: 20px 0;
     flex-wrap: wrap;
+}
+
+/* Guess Row */
+.guess-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
 .cell {
@@ -107,7 +115,7 @@ button:hover {
 /* Legend for Feedback */
 .legend {
     margin-top: 20px;
-    font-size: 1em;
+    font-size: 1.3em;
     color: #555;
 }
 
@@ -131,6 +139,16 @@ button:hover {
     background-color: green;
 }
 
+/* Rule Paragraph */
+.rule {
+    margin-top: 10px;
+    font-size: 1.3em;
+    color: #777;
+    text-align: center;
+    font-style: italic;
+}
+
+
 /* Wikipedia Embed Container */
 #wiki-embed-container {
     margin-top: 20px;
@@ -143,19 +161,6 @@ button:hover {
     border: none;
     border-radius: 10px;
 }
-
-/* Description Styles */
-.description {
-    margin-top: 30px;
-    font-size: 1.2em;
-    color: #555;
-    text-align: center;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.5;
-}
-
 
 /* Responsive Design for Smaller Screens */
 @media (max-width: 600px) {
@@ -191,3 +196,16 @@ button:hover {
         font-size: 0.8em;
     }
 }
+
+/* Description Styles */
+.description {
+    margin-top: 30px;
+    font-size: 1.2em;
+    color: #555;
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+}
+
