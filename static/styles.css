@@ -72,7 +72,7 @@ input[type="text"] {
     border: 2px solid #ccc;
     border-radius: 5px;
     outline: none;
-    font-family: 'Cormorant Garamond', 'Linux Libertine', serif; /* Font for input text */
+    font-family: 'Cormorant Garamond', 'Linux Libertine', serif;
 }
 
 /* Button Styles */
@@ -86,7 +86,7 @@ button {
     border-radius: 5px;
     margin-bottom: 20px;
     transition: background-color 0.3s;
-    font-family: 'Cormorant Garamond', 'Linux Libertine', serif; /* Font for button text */
+    font-family: 'Cormorant Garamond', 'Linux Libertine', serif;
 }
 
 button:disabled {
