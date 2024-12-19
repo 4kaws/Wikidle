@@ -144,6 +144,19 @@ button:hover {
     border-radius: 10px;
 }
 
+/* Description Styles */
+.description {
+    margin-top: 30px;
+    font-size: 1.2em;
+    color: #555;
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+}
+
+
 /* Responsive Design for Smaller Screens */
 @media (max-width: 600px) {
     h1 {
