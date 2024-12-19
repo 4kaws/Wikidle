@@ -29,15 +29,34 @@ async function sha256(str) {
 }
 
 // Validate the input and enable/disable the submit button
+// Validate the input using both the local word list and the Datamuse API
 function validateInput() {
-    const guess = document.getElementById("guess").value.toLowerCase();
+    const guess = document.getElementById("guess").value.trim().toLowerCase();
     const submitButton = document.getElementById("submit-button");
-    if (validWords.includes(guess) && guess.length === 5) {
-        submitButton.disabled = false;
+
+    if (guess.length === 5) {
+        if (validWords.includes(guess)) {
+            submitButton.disabled = false;
+        } else {
+            // Check if the word exists in English using the Datamuse API
+            fetch(`https://api.datamuse.com/words?sp=${guess}&max=1`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0 && data[0].word === guess) {
+                        submitButton.disabled = false;
+                    } else {
+                        submitButton.disabled = true;
+                    }
+                })
+                .catch(() => {
+                    submitButton.disabled = true;
+                });
+        }
     } else {
         submitButton.disabled = true;
     }
 }
+
 
 function checkGuess() {
     const guess = document.getElementById("guess").value.toLowerCase();
